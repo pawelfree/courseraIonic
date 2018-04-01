@@ -35,7 +35,6 @@ export class DishProvider {
   }
 
   getFeaturedDish(): Observable<Dish> {
-    console.log(this.http.get(baseURL + 'dishes?featured=true'));
     return this.http.get(baseURL + 'dishes?featured=true')
                 .map(res => { return this.processHttpmsgService.extractData(res)[0]})
                 .catch(err => {return this.processHttpmsgService.handleError(err)});
