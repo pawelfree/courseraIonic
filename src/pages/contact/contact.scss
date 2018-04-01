@@ -1,3 +1,11 @@
 page-contact {
-
+    .card-header {
+        color: map-get($colors,primary);
+    }
+    .icon {
+        font-size: 1.0em;
+        span {
+            font-style: italic;
+        }
+    }
 }

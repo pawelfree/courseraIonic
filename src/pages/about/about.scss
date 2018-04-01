@@ -1,3 +1,5 @@
 page-about {
-
+    .card-header {
+        color: map-get($colors,primary);
+    }
 }
