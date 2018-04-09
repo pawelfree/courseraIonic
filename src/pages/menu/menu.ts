@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, FactoryProvider } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Dish } from '../../shared/dish';
 import { DishProvider } from '../../providers/dish/dish';
