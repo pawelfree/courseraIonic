@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 /**
  * Generated class for the ReservationPage page.
@@ -15,8 +16,17 @@ import { ViewController, IonicPage, NavController, NavParams } from 'ionic-angul
 })
 export class ReservationPage {
 
+  reservation: FormGroup;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController,
+              public fb: FormBuilder) {
+
+    this.reservation = this.fb.group({
+      guests: 3,
+      smoking: false,
+      dateTime: ['', Validators.required]
+    });
   }
 
   ionViewDidLoad() {
@@ -24,6 +34,11 @@ export class ReservationPage {
   }
 
   dismiss() {
+    this.viewCtrl.dismiss();
+  }
+
+  onSubmit() {
+    console.log(this.reservation.value);
     this.viewCtrl.dismiss();
   }
 }
