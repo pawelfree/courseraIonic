@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams , ToastController} from 'ionic-angular';
+import { ModalController, IonicPage, NavController, NavParams, ToastController, ActionSheetController} from 'ionic-angular';
 import { Dish } from '../../shared/dish';
-import { Comment } from '../../shared/comment';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
+import { CommentPage } from '../comment/comment';
 /**
  * Generated class for the DishdetailPage page.
  *
@@ -27,6 +27,8 @@ export class DishdetailPage {
               public navParams: NavParams,
               private favoriteService: FavoriteProvider,
               private toastCtrl: ToastController,
+              private actionSheetCtrl: ActionSheetController,
+              private modalCtrl: ModalController,
             @Inject('BaseURL') private BaseURL) {
     this.dish = navParams.get('dish');
     this.numcomments = this.dish.comments.length;
@@ -41,12 +43,45 @@ export class DishdetailPage {
   }
 
   addToFavorites() {
-    console.log("adding to favorites ", this.dish.id)
+    console.log("adding to favorites", this.dish.id)
     this.favorite = this.favoriteService.addFavorite(this.dish.id);
     this.toastCtrl.create({
       message: 'Dish ' + this.dish.id + ' added to favorites',
       position: 'middle',
       duration: 3000
+    }).present();
+  }
+
+  openAddComment() {
+      let modal = this.modalCtrl.create(CommentPage);
+      modal.onDidDismiss((data) => {
+        console.log('Did dismiss');
+        this.dish.comments.push(data);
+      });
+      modal.present();
+  }
+
+  actions() {
+    console.log("display action");
+    this.actionSheetCtrl.create({
+      title: 'Select action',
+      buttons: [
+        {
+          text: "Add to favorites",
+          handler: () => { this.addToFavorites() }
+        },
+        {
+          text: "Add comment",
+          handler: () => { this.openAddComment() }
+        },
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log('Cancel clicekd');
+          }
+        }
+      ]
     }).present();
   }
 }
