@@ -55,14 +55,12 @@ export class DishdetailPage {
   openAddComment() {
       let modal = this.modalCtrl.create(CommentPage);
       modal.onDidDismiss((data) => {
-        console.log('Did dismiss');
         this.dish.comments.push(data);
       });
       modal.present();
   }
 
   actions() {
-    console.log("display action");
     this.actionSheetCtrl.create({
       title: 'Select action',
       buttons: [
