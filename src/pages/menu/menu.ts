@@ -4,6 +4,7 @@ import { Dish } from '../../shared/dish';
 import { DishProvider } from '../../providers/dish/dish';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
 import { DishdetailPage } from '../dishdetail/dishdetail';
+
 /**
  * Generated class for the MenuPage page.
  *
